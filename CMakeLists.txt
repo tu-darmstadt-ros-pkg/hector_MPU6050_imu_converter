@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(hector_MPU6050_imu_converter)
+project(hector_mpu6050_imu_converter)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -128,14 +128,14 @@ include_directories(
 # add_dependencies(hector_MPU6050_imu_converter ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-add_executable(hector_MPU6050_imu_converter_node src/hector_MPU6050_imu_converter_node.cpp)
+add_executable(hector_mpu6050_imu_converter_node src/hector_MPU6050_imu_converter_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(hector_MPU6050_imu_converter_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(hector_mpu6050_imu_converter_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(hector_MPU6050_imu_converter_node
+target_link_libraries(hector_mpu6050_imu_converter_node
    ${catkin_LIBRARIES}
 )
 
