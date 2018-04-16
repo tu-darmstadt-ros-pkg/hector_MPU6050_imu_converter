@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+  
+  <arg name="port" default="/dev/ttyUSB0"/>
+  
+  <node pkg="rosserial_python" type="serial_node.py" name="mpu6050_serial_node" output="screen">
+    <param name="port" value="$(arg port)" />
+    <param name="baud" value="57600"/>
+  </node>
+  
+  <node pkg="hector_mpu6050_imu_converter" type="hector_mpu6050_imu_converter_node" name="mpu6050_imu_converter_node" output="screen">
+    <remap from="~/imu" to="/imu/data"/>
+  </node>
+  
+</launch>
+

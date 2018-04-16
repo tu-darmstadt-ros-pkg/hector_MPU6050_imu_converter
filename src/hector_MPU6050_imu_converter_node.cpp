@@ -48,7 +48,6 @@ void quaternionCb(const geometry_msgs::Quaternion::ConstPtr& msg){
     //@TODO make time offset param
     ros::Time sensor_data_time = ros::Time::now() - ros::Duration(0.002);
 
-
     if (imu_subscribed){
       imu_msg.header.stamp = sensor_data_time;
 
@@ -68,8 +67,6 @@ void quaternionCb(const geometry_msgs::Quaternion::ConstPtr& msg){
 }
 
 int main(int argc, char** argv){
-
-
 
     ros::init(argc, argv, "hector_mpu6050_imu_converter");
 
@@ -95,18 +92,20 @@ int main(int argc, char** argv){
     imu_msg.orientation_covariance[8] = 0.1;
 
 
-    imu_msg.angular_velocity_covariance[0] = angular_velocity_cov;
-    imu_msg.angular_velocity_covariance[4] = angular_velocity_cov;
-    imu_msg.angular_velocity_covariance[8] = angular_velocity_cov;
+    // Angular velocity entries are not filled, so set to -1.0
+    imu_msg.angular_velocity_covariance[0] = -1.0; //angular_velocity_cov;
+    //imu_msg.angular_velocity_covariance[4] = angular_velocity_cov;
+    //imu_msg.angular_velocity_covariance[8] = angular_velocity_cov;
 
-    imu_msg.linear_acceleration_covariance[0] = linear_acceleration_cov;
-    imu_msg.linear_acceleration_covariance[4] = linear_acceleration_cov;
-    imu_msg.linear_acceleration_covariance[8] = linear_acceleration_cov;
+    // Linear acceleration entries are not filled, so set to -1.0
+    imu_msg.linear_acceleration_covariance[0] = -1.0;
+    //imu_msg.linear_acceleration_covariance[4] = linear_acceleration_cov;
+    //imu_msg.linear_acceleration_covariance[8] = linear_acceleration_cov;
 
-    posePub_ = _pnh.advertise<geometry_msgs::PoseStamped>("pose", 1000);
-    imuPub_ = _pnh.advertise<sensor_msgs::Imu>("imu", 1000);
+    posePub_ = _pnh.advertise<geometry_msgs::PoseStamped>("pose", 10);
+    imuPub_ = _pnh.advertise<sensor_msgs::Imu>("imu", 10);
 
-    ros::Subscriber quatSub_ = _nh.subscribe("quaternion", 1000, quaternionCb);
+    ros::Subscriber quatSub_ = _nh.subscribe("quaternion", 10, quaternionCb);
 
     ros::spin();
 
